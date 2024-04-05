@@ -10,8 +10,6 @@ public class UserProfile {
         this.index = ProfileHandler.getLastIndex();
         this.login = login;
         this.password = password;
-
-
     }
     public String getLogin() {
         return login;
