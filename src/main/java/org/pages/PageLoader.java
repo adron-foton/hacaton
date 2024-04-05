@@ -10,38 +10,31 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
-/**
- * @author v.chibrikov
- *         <p>
- *         Пример кода для курса на https://stepic.org/
- *         <p>
- *         Описание курса и лицензия: https://github.com/vitaly-chibrikov/stepic_java_webserver
- */
-public class PageGenerator {
+public class PageLoader {
     private static final String HTML_DIR = "/resources/";
 
-    private static PageGenerator pageGenerator;
+    private static PageLoader pageLoader;
     private final Configuration cfg;
 
-    public static PageGenerator instance() {
-        if (pageGenerator == null)
-            pageGenerator = new PageGenerator();
-        return pageGenerator;
+    public static PageLoader instance() {
+        if (pageLoader == null)
+            pageLoader = new PageLoader();
+        return pageLoader;
     }
 
     public String getPage(String filename, Map<String, Object> data) {
-        Writer stream = new StringWriter();
+        Writer writer = new StringWriter();
         try {
             cfg.setDirectoryForTemplateLoading(new File("C:/Users/Andrei/IdeaProjects/JettyServer/src/main/resources"));
             Template template = cfg.getTemplate(filename);
-            template.process(data, stream);
+            template.process(data, writer);
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
-        return stream.toString();
+        return writer.toString();
     }
 
-    private PageGenerator() {
+    private PageLoader() {
         cfg = new Configuration();
     }
 }
