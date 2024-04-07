@@ -57,15 +57,11 @@ public class DBService {
         try {
             DriverManager.registerDriver((java.sql.Driver) Class.forName("org.postgresql.Driver").newInstance());
 
-            StringBuilder url = new StringBuilder();
+            String path = "jdbc:postgresql://localhost:5432/javaDB";
+            String user = "postgres";
+            String password = "01229";
 
-            url.
-                    append("jdbc:postgresql://localhost:5432/.../user=").
-                    append(user_login).
-                    append("/password=").
-                    append(user_password);
-
-            Connection connection = DriverManager.getConnection(url.toString());
+            Connection connection = DriverManager.getConnection(path,user, password);
 
             return connection;
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
