@@ -11,8 +11,11 @@ import java.sql.SQLException;
 public class DBService {
 
     private static final DataSource dataSource = getPostgresDataSource();
+    private Connection connection;
 
-
+    public DBService() throws SQLException {
+        connection = dataSource.getConnection();
+    }
 
     public UsersDataSet getUser(long id) throws DBException {
         try {
@@ -34,6 +37,7 @@ public class DBService {
             try {
                 connection.rollback();
             } catch (SQLException ignore) {
+
             }
             throw new DBException(e);
         } finally {
