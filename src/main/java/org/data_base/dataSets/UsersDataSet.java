@@ -8,12 +8,19 @@ public class UsersDataSet {
     private String login;
     private String password;
 
+    private String email_contact;
 
-    public UsersDataSet(long id, String first_name, String login, String password) {
+
+    public UsersDataSet(long id, String first_name, String login, String password, String email_contact) {
         this.id = id;
         this.first_name = first_name;
         this.login = login;
         this.password = password;
+        this.email_contact = email_contact;
+    }
+
+    public UsersDataSet() {
+
     }
 
     public String getFirst_name() {

@@ -18,9 +18,7 @@ public class Executor {
         statement.close();
     }
 
-    public <T> T execQuery(String query,
-                           ResultHandler<T> handler)
-            throws SQLException {
+    public <T> T execQuery(String query, ResultHandler<T> handler) throws SQLException {
         Statement statement = connection.createStatement();
         statement.execute(query);
         ResultSet result = statement.getResultSet();

@@ -21,9 +21,10 @@ public class Profiles_TableEnvironment {
                     result.getLong(1),
                     result.getString("first_name"),
                     result.getString("login"),
-                    result.getString("password")
+                    result.getString("password"),
+                    result.getString("email_contact")
             );
-        });//TODO:
+        });
     }
 
     public long getUserId(String login) throws SQLException {
