@@ -1,6 +1,5 @@
 package org.server;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,11 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AllRequestsServlet extends HttpServlet {
+    private String login;
+    private String password;
 
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws ServletException, IOException {
 
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
+
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        Map<String, Object> pageVariables = createPageVariablesMap(request, response);
         pageVariables.put("message", "");
 
         response.getWriter().println(PageLoader.instance().getPage("page.html", pageVariables));
@@ -24,10 +27,9 @@ public class AllRequestsServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
 
     }
-
-    public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, Object> pageVariables = createPageVariablesMap(request, response);
 
         String message = request.getParameter("message");
 
@@ -43,13 +45,16 @@ public class AllRequestsServlet extends HttpServlet {
         response.getWriter().println(PageLoader.instance().getPage("page.html", pageVariables));
     }
 
-    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
+    private static Map<String, Object> createPageVariablesMap(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> pageVariables = new HashMap<>();
-        pageVariables.put("method", request.getMethod());
-        pageVariables.put("URL", request.getRequestURL().toString());
-        pageVariables.put("pathInfo", request.getPathInfo());
-        pageVariables.put("sessionId", request.getSession().getId());
-        pageVariables.put("parameters", request.getParameterMap().toString());
+
+        pageVariables.put("request", request);
+        pageVariables.put("response", response);
+//        pageVariables.put("method", request.getMethod());
+//        pageVariables.put("URL", request.getRequestURL().toString());
+//        pageVariables.put("pathInfo", request.getPathInfo());
+//        pageVariables.put("sessionId", request.getSession().getId());
+//        pageVariables.put("parameters", request.getParameterMap().toString());
         return pageVariables;
     }
 }

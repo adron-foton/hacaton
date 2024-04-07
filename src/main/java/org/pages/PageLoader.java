@@ -11,7 +11,8 @@ import java.io.Writer;
 import java.util.Map;
 
 public class PageLoader {
-    private static final String HTML_DIR = "/resources/";
+    //private static final String HTML_DIR = "C:/Users/Andrei/IdeaProjects/JettyServer/src/main/resources/project9153769/";
+    private static final String HTML_DIR = "C:/Users/Andrei/IdeaProjects/JettyServer/src/main/resources/";
 
     private static PageLoader pageLoader;
     private final Configuration cfg;
@@ -25,7 +26,7 @@ public class PageLoader {
     public String getPage(String filename, Map<String, Object> data) {
         Writer writer = new StringWriter();
         try {
-            cfg.setDirectoryForTemplateLoading(new File("C:/Users/Andrei/IdeaProjects/JettyServer/src/main/resources"));
+            cfg.setDirectoryForTemplateLoading(new File(HTML_DIR));
             Template template = cfg.getTemplate(filename);
             template.process(data, writer);
         } catch (IOException | TemplateException e) {
@@ -33,6 +34,31 @@ public class PageLoader {
         }
         return writer.toString();
     }
+
+    public String getPage(String filename) {
+        Writer writer = new StringWriter();
+
+        try {
+            cfg.setDirectoryForTemplateLoading(new File(HTML_DIR));
+            Template template = cfg.getTemplate(filename);
+            writer.append(template.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
+    }
+
+//    public String getPage(String filename) {
+//        Writer writer = new StringWriter();
+//        try {
+//            cfg.setDirectoryForTemplateLoading(new File(HTML_DIR));
+//            Template template = cfg.getTemplate(filename);
+//            template.process(data, writer);
+//        } catch (IOException | TemplateException e) {
+//            e.printStackTrace();
+//        }
+//        return writer.toString();
+//    }
 
     private PageLoader() {
         cfg = new Configuration();
