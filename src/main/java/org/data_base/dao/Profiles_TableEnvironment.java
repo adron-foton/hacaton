@@ -34,7 +34,7 @@ public class Profiles_TableEnvironment {
     }
 
     public void insertUser(String login, String password, String first_name) throws SQLException {
-        executor.execUpdate("insert into profiles (login, password, first_name) values ('" + login + "') ('" + password + "') ('" + first_name + "')");
+        executor.execUpdate("insert into profiles (login, password, first_name) values ('" + login + "', '" + password + "', '" + first_name + "')");
     }
 
 //    public void createTable() throws SQLException {
