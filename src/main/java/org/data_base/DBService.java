@@ -53,7 +53,7 @@ public class DBService {
 //        }
 //    }
 
-    public static Connection getPostgresConnection(String user_login, String user_password) {
+    public static Connection getPostgresConnection() {
         try {
             DriverManager.registerDriver((java.sql.Driver) Class.forName("org.postgresql.Driver").newInstance());
 
@@ -61,30 +61,10 @@ public class DBService {
             String user = "postgres";
             String password = "01229";
 
-            Connection connection = DriverManager.getConnection(path,user, password);
+            Connection connection = DriverManager.getConnection(path, user, password);
 
             return connection;
         } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static Connection getPostgresConnection() {
-        //TODO: уточнитб связь с базой
-        try {
-            String url = "jdbc:postgres:";
-            String name = "tully";
-            String password = "tully";
-
-//            Jdbc3SimpleDataSource dataSource = new Jdbc3SimpleDataSource();
-//            dataSource.setURL(url);
-//            dataSource.setUser(name);
-//            dataSource.setPassword(password);
-
-            Connection connection = DriverManager.getConnection(url, name, password);
-            return connection;
-        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
