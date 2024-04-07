@@ -8,6 +8,10 @@ public class UsersDataSet {
     private String login;
     private String password;
 
+    public String getEmail_contact() {
+        return email_contact;
+    }
+
     private String email_contact;
 
 
@@ -27,15 +31,20 @@ public class UsersDataSet {
         return first_name;
     }
 
-    public long getId() {
+    public long getID() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "UsersDataSet{" +
-                "id=" + id +
-                ", name='" + first_name + '\'' +
-                '}';
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

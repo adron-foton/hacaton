@@ -53,7 +53,7 @@ public class AllRequestsServlet extends HttpServlet {
 //        pageVariables.put("method", request.getMethod());
 //        pageVariables.put("URL", request.getRequestURL().toString());
 //        pageVariables.put("pathInfo", request.getPathInfo());
-//        pageVariables.put("sessionId", request.getSession().getId());
+//        pageVariables.put("sessionId", request.getSession().getID());
 //        pageVariables.put("parameters", request.getParameterMap().toString());
         return pageVariables;
     }
