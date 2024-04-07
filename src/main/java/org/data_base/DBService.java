@@ -4,7 +4,6 @@ import org.data_base.dao.UsersDAO;
 import org.data_base.dataSets.UsersDataSet;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DBService {
@@ -56,7 +55,7 @@ public class DBService {
 
     public static Connection getPostgresConnection(String user_login, String user_password) {
         try {
-            DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
+            DriverManager.registerDriver((java.sql.Driver) Class.forName("org.postgresql.Driver").newInstance());
 
             StringBuilder url = new StringBuilder();
 
