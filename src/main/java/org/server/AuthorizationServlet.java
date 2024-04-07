@@ -39,7 +39,6 @@ public class AuthorizationServlet extends HttpServlet {
 
         response.setContentType("text/html;utf-8");
         response.getWriter().println(PageLoader.instance().getPage("temp/singin.html", pageVariables));
-        System.out.println(PageLoader.instance().getPage("temp/singin.html", pageVariables).toString());
     }
 
 //    private boolean authorize(String login, String password) {
