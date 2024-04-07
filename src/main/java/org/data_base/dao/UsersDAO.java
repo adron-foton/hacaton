@@ -18,7 +18,7 @@ public class UsersDAO {
         return executor.execQuery("select * from profiles where id=" + id, result -> {
             result.next();
             return new UsersDataSet(result.getLong(1), result.getString("first_name"), result.getString("login"),result.getString("password") );
-        });
+        });//TODO:
     }
 
     public long getUserId(String name) throws SQLException {
