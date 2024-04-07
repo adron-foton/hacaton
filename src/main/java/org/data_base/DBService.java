@@ -1,6 +1,6 @@
 package org.data_base;
 
-import org.data_base.dao.UsersDAO;
+import org.data_base.dao.Profiles_TableEnvironment;
 import org.data_base.dataSets.UsersDataSet;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -20,19 +20,18 @@ public class DBService {
     public UsersDataSet getUser(long id) throws DBException {
         try {
             Connection connection = dataSource.getConnection();
-            return new UsersDAO(connection).get(id);
+            return new Profiles_TableEnvironment(connection).getByID(id);
         } catch (SQLException e) {
             throw new DBException(e);
         }
     }
 
-    public long addUser(String name) throws DBException {
+    public void addUser(String login, String first_name, String password) throws DBException {
         try {
             connection.setAutoCommit(false);
-            UsersDAO dao = new UsersDAO(connection);
-            dao.insertUser(name);
+            Profiles_TableEnvironment dao = new Profiles_TableEnvironment(connection);
+            dao.insertUser(login, password, first_name);
             connection.commit();
-            return dao.getUserId(name);
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -43,8 +42,7 @@ public class DBService {
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException ignore) {
-            }
+            } catch (SQLException ignoring) {}
         }
     }
 
