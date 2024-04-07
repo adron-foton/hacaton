@@ -4,7 +4,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.data_base.DBException;
 import org.data_base.DBService;
+import org.data_base.dataSets.UsersDataSet;
 import org.pages.PageLoader;
 
 import java.io.IOException;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class AuthorizationServlet extends HttpServlet {
 
     DBService data_base;
+    Map<String, Object> pageVariables;
+
 
     public AuthorizationServlet() {
         try {
@@ -40,8 +44,10 @@ public class AuthorizationServlet extends HttpServlet {
         if (login == null || login.isEmpty() || password == null || password.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             pageVariables.replace("massage", "those fields are required to be filled in");
-        } else /*if (validation(login, password))*/ {
+        } else if (validation(login, password)) {
             response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
 
         response.setContentType("text/html;utf-8");
@@ -61,6 +67,11 @@ public class AuthorizationServlet extends HttpServlet {
         return pageVariables;
     }
     private boolean validation(String login, String password) {
-        return password==
+        try {
+            return password == data_base.getUser(new UsersDataSet().getID()).getPassword();
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
