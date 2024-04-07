@@ -19,7 +19,7 @@ public class AuthorizationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(PageLoader.instance().getPage("singin.html"));
+        response.getWriter().println(PageLoader.instance().getPage("temp/singin.html"));
     }
 
     @Override
@@ -38,8 +38,8 @@ public class AuthorizationServlet extends HttpServlet {
         }
 
         response.setContentType("text/html;utf-8");
-        response.getWriter().println(PageLoader.instance().getPage("singin.html", pageVariables));
-        System.out.println(PageLoader.instance().getPage("singin.html", pageVariables).toString());
+        response.getWriter().println(PageLoader.instance().getPage("temp/singin.html", pageVariables));
+        System.out.println(PageLoader.instance().getPage("temp/singin.html", pageVariables).toString());
     }
 
 //    private boolean authorize(String login, String password) {

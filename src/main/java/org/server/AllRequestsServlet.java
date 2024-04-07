@@ -21,7 +21,7 @@ public class AllRequestsServlet extends HttpServlet {
         Map<String, Object> pageVariables = createPageVariablesMap(request, response);
         pageVariables.put("message", "");
 
-        response.getWriter().println(PageLoader.instance().getPage("page.html", pageVariables));
+        response.getWriter().println(PageLoader.instance().getPage("temp/page.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -42,7 +42,7 @@ public class AllRequestsServlet extends HttpServlet {
         }
         pageVariables.put("message", message == null ? "" : message);
 
-        response.getWriter().println(PageLoader.instance().getPage("page.html", pageVariables));
+        response.getWriter().println(PageLoader.instance().getPage("temp/page.html", pageVariables));
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request, HttpServletResponse response) {
